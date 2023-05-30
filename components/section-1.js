@@ -1,5 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import Author from "../components/_child/author";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay } from "swiper";
+import "swiper/css";
 
 function Slide() {
   return (
@@ -12,8 +16,10 @@ function Slide() {
       <div className="info flex justify-center flex-col">
         <div className="cat">
           <Link href={"/"}>
-            <a className="text-red-600 hover:text-red-500">Next JS</a>
-            <a className="text-gray-600 hover:text-gray-500"> - July 3, 2022</a>
+            <div className="text-red-600 hover:text-red-500">Next JS </div>
+            <div className="text-gray-600 hover:text-gray-500">
+              July 3, 2022
+            </div>
           </Link>
         </div>
         <div className="title">
@@ -31,18 +37,36 @@ function Slide() {
           nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl
           sit amet erat.
         </p>
-        <h1>author</h1>
+        <Author />
       </div>
     </div>
   );
 }
 
 export default function section1() {
+  SwiperCore.use([Autoplay]);
+  const bgImage = {
+    background: "url('/images/banner.png')no-repeat",
+    backgroundPosition: "right",
+  };
+
   return (
-    <section className="py-16">
+    <section className="py-16" style={bgImage}>
       <div className="container mx-auto md:px-20">
         <h1 className="font-bold text-4xl pb-12 text-center">Trending</h1>
-        {Slide()}
+
+        <Swiper
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+          }}
+        >
+          <SwiperSlide>{Slide()}</SwiperSlide>
+          <SwiperSlide>{Slide()}</SwiperSlide>
+          <SwiperSlide>{Slide()}</SwiperSlide>
+          <SwiperSlide>{Slide()}</SwiperSlide>
+        </Swiper>
       </div>
     </section>
   );
