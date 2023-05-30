@@ -1,7 +1,12 @@
 import Format from "../layouts/format";
 
+// Components
+import Section1 from "@/components/section-1";
+
 export default function Home() {
-  return <Format>
-    <h1>Main Content</h1>
-  </Format>;
+  return (
+    <Format>
+      <Section1 />
+    </Format>
+  );
 }
