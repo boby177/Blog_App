@@ -1,10 +1,7 @@
-import Header from "../components/header";
+import Format from "../layouts/format";
 
 export default function Home() {
-  return (
-    <div>
-      <Header />
-        
-    </div>
-  );
+  return <Format>
+    <h1>Main Content</h1>
+  </Format>;
 }
