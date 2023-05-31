@@ -2,13 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Author from "../components/_child/author2";
 import fetcher from "../lib/fetcher";
+import Spinner from "./_child/spinner";
+import Error from "./_child/error";
 
 export default function section2() {
   const { data, isLoading, isError } = fetcher(`api/posts`);
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   } else if (isError) {
-    return <div>Error </div>;
+    return <Error />;
   }
 
   return (

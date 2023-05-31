@@ -4,46 +4,53 @@ import Author from "../components/_child/author";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
+import fetcher from "../lib/fetcher";
+import Spinner from "./_child/spinner";
+import Error from "./_child/error";
 
-function Slide() {
+function Slide({ data }) {
+  const { id, title, description, category, img, published, author } = data;
+
   return (
     <div className="grid md:grid-cols-2">
       <div className="image px-10">
         <Link href={"/"}>
-          <Image src={"/images/img1.jpg"} width={600} height={600} />
+          <Image src={img || "/"} width={600} height={600} />
         </Link>
       </div>
       <div className="info flex justify-center flex-col">
         <div className="cat">
           <Link href={"/"}>
-            <div className="text-red-600 hover:text-red-500">Next JS </div>
+            <div className="text-red-600 hover:text-red-500">
+              {category || "Unknow"}
+            </div>
             <div className="text-gray-600 hover:text-gray-500">
-              July 3, 2022
+              {published || "Unknown"}
             </div>
           </Link>
         </div>
         <div className="title">
           <Link href={"/"}>
             <div className="text-3xl md:text-6xl font-bold text-gray-600 hover:text-gray-600">
-              Learn about next JS and tailwind css
+              {title || "Unknown"}
             </div>
           </Link>
         </div>
-        <p className="text-gray-500 py-3">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
-          risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
-          ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
-          massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci
-          nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl
-          sit amet erat.
-        </p>
-        <Author />
+        <p className="text-gray-500 py-3">{description || "Description"}</p>
+        {author ? <Author /> : <></>}
       </div>
     </div>
   );
 }
 
 export default function section1() {
+  const { data, isLoading, isError } = fetcher(`api/trending`);
+  if (isLoading) {
+    return <Spinner />;
+  } else if (isError) {
+    return <Error />;
+  }
+
   SwiperCore.use([Autoplay]);
   const bgImage = {
     background: "url('/images/banner.png')no-repeat",
@@ -62,10 +69,11 @@ export default function section1() {
             delay: 2000,
           }}
         >
-          <SwiperSlide>{Slide()}</SwiperSlide>
-          <SwiperSlide>{Slide()}</SwiperSlide>
-          <SwiperSlide>{Slide()}</SwiperSlide>
-          <SwiperSlide>{Slide()}</SwiperSlide>
+          {data.map((value, index) => (
+            <SwiperSlide key={index}>
+              <Slide data={value} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </section>
