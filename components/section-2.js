@@ -31,11 +31,18 @@ function Post({ data }) {
   return (
     <div className="item">
       <div className="images">
-        <Image src={img || "/"} className="rounded" width={500} height={350} />
+        <Link href={`/posts/${id}`}>
+          <Image
+            src={img || "/"}
+            className="rounded"
+            width={500}
+            height={350}
+          />
+        </Link>
       </div>
       <div className="info flex justify-center flex-col py-4">
         <div className="cat">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <div className="text-red-600 hover:text-red-500">
               {category || "Unknown"}
             </div>
@@ -45,7 +52,7 @@ function Post({ data }) {
           </Link>
         </div>
         <div className="title">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <div className="text-xl font-bold text-gray-600 hover:text-gray-600">
               {title || "Title"}
             </div>

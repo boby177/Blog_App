@@ -21,10 +21,15 @@ export default function section3() {
       </h1>
       {/* Swiper */}
       <Swiper
-        slidesPerView={2}
         loop={true}
         autoplay={{
           delay: 5000,
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween:30,
+          },
         }}
       >
         {data.map((value, index) => (
@@ -43,11 +48,13 @@ function Post({ data }) {
   return (
     <div className="grid px-10">
       <div className="images">
-        <Image src={img} width={600} height={400} />
+        <Link href={`/posts/${id}`}>
+          <Image src={img} width={600} height={400} />
+        </Link>
       </div>
       <div className="info flex justify-center flex-col py-4">
         <div className="cat">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <div className="text-red-600 hover:text-red-500">
               {category || "Unknown"}
             </div>
@@ -57,7 +64,7 @@ function Post({ data }) {
           </Link>
         </div>
         <div className="title">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <div className="text-3xl md:text-4xl font-bold text-gray-600 hover:text-gray-600">
               {title || "title"}
             </div>

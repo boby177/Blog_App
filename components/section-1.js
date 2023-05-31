@@ -14,13 +14,13 @@ function Slide({ data }) {
   return (
     <div className="grid md:grid-cols-2">
       <div className="image px-10">
-        <Link href={"/"}>
+        <Link href={`/posts/${id}`}>
           <Image src={img || "/"} width={600} height={600} />
         </Link>
       </div>
       <div className="info flex justify-center flex-col">
         <div className="cat">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <div className="text-red-600 hover:text-red-500">
               {category || "Unknow"}
             </div>
@@ -30,7 +30,7 @@ function Slide({ data }) {
           </Link>
         </div>
         <div className="title">
-          <Link href={"/"}>
+          <Link href={`/posts/${id}`}>
             <div className="text-3xl md:text-6xl font-bold text-gray-600 hover:text-gray-600">
               {title || "Unknown"}
             </div>
