@@ -1,7 +1,37 @@
+import { ImFacebook, ImTwitter, ImYoutube } from "react-icons/im";
+import Link from "next/link";
+import Newslatter from "./_child/newslatter";
+
 export default function footer() {
+  const bg = {
+    backgroundImage: "url('/images/footer.png')",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "bottom-left",
+  };
+
   return (
-    <div className="text-3xl">
-      <hr></hr>
-    </div>
+    <footer className="bg-blue-50">
+      {/* <Newslatter /> */}
+      <div className="container mx-auto flex justify-center py-12">
+        <div className="py-5">
+          <div className="flex gap-6 justify-center">
+            <Link href={"/"}>
+              <ImFacebook color="#888888" />
+            </Link>
+            <Link href={"/"}>
+              <ImTwitter color="#888888" />
+            </Link>
+            <Link href={"/"}>
+              <ImYoutube color="#888888" />
+            </Link>
+          </div>
+          <p className="py-5 text-gray-400">
+            Copyright ©2023 B-Techs | This template is made with by Daily
+            Tuition
+          </p>
+          <p className="text-gray-400 text-center">Terms & Conditions</p>
+        </div>
+      </div>
+    </footer>
   );
 }
